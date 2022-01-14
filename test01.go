@@ -2,7 +2,13 @@ package main
 
 import (
 	"fmt"
+	"os"
 )
+
+type Person struct {
+	name string
+	age  int
+}
 
 func main() {
 	// 変数宣言
@@ -19,10 +25,12 @@ func main() {
 	fumufumu := "strings"
 	nooooo := false
 	uuuuuu := 3.45
+	urune := 'a'
 	fmt.Println(humuhumu)
 	fmt.Println(fumufumu)
 	fmt.Println(nooooo)
 	fmt.Println(uuuuuu)
+	fmt.Println(urune)
 
 	// エイリアス
 	type HogeString string
@@ -59,4 +67,50 @@ func main() {
 		aaaa = append(aaaa, i)
 		fmt.Println(len(aaaa), cap(aaaa))
 	}
+
+	// map
+	m := map[string]int{
+		"x": 100,
+		"y": 200,
+		"z": 2,
+	}
+	fmt.Println(m)
+
+	err, ok := m["z"]
+	if ok {
+		fmt.Println("exist", err)
+	} else {
+		fmt.Println("not exist", err)
+	}
+	for key, value := range m {
+		fmt.Printf("%s = %d\n", key, value)
+	}
+
+	ad, mi := addMinus(1, 2)
+	fmt.Println(ad, mi)
+
+	person := Person{"takuya", 29}
+	person.PrintOut()
+
+	q, ok := ccccc(13.24)
+	fmt.Println(q, ok)
+
+	fmt.Println(os.Getenv("EDITOR"))
+}
+
+func addMinus(x int, y int) (int, int) {
+	return x + y, x - y
+}
+
+func (p Person) ToString() string {
+	return p.name
+}
+
+func (p Person) PrintOut() {
+	fmt.Println(p.ToString())
+}
+
+func ccccc(a interface{}) (int, bool) {
+	q, ok := a.(int)
+	return q, ok
 }
